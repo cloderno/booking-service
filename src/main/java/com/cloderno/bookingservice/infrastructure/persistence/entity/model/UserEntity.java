@@ -1,4 +1,4 @@
-package com.cloderno.bookingservice.domain.model;
+package com.cloderno.bookingservice.infrastructure.persistence.entity.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +12,7 @@ import java.util.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -27,5 +27,6 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    @Builder.Default
+    private Set<RoleEntity> roles = new HashSet<>();
 }

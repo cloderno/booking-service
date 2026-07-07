@@ -1,5 +1,7 @@
-package com.cloderno.bookingservice.domain.model;
+package com.cloderno.bookingservice.infrastructure.persistence.entity.model;
 
+import com.cloderno.bookingservice.domain.model.Action;
+import com.cloderno.bookingservice.domain.model.Resource;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +17,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Permissions {
+public class PermissionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,5 +29,5 @@ public class Permissions {
     private Action action;
 
     @ManyToMany(mappedBy = "permissions")
-    private Set<Role> roles = new HashSet<>();
+    private Set<RoleEntity> roles = new HashSet<>();
 }

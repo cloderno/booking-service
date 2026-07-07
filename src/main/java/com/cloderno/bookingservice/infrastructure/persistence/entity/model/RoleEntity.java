@@ -1,5 +1,6 @@
-package com.cloderno.bookingservice.domain.model;
+package com.cloderno.bookingservice.infrastructure.persistence.entity.model;
 
+import com.cloderno.bookingservice.domain.model.RoleName;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,16 +16,17 @@ import java.util.Set;
 @Table(name = "roles")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role {
+public class RoleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, unique = true)
     private RoleName name;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
+    private Set<UserEntity> users = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
@@ -32,5 +34,5 @@ public class Role {
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id")
     )
-    private Set<Permissions> permissions = new HashSet<>();
+    private Set<PermissionEntity> permissions = new HashSet<>();
 }
